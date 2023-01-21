@@ -54,7 +54,7 @@ export default {
       ApiService.post('/login', this.loginInfo).then(({data}) => {
         console.log('data', data);
         if (data.status === 200) {
-          JwtService.saveToken(data.access_token);
+          JwtService.saveToken(data.access_token,data.refresh_token);
           ApiService.init();
           this.$store.commit("STORE_USER", data.user);
           this.toastMessage('Login Successfully');

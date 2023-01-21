@@ -14,15 +14,6 @@ const AuthCheckService ={
                         params: {nextUrl: to.fullPath}
                     })
                 }
-                else {
-                    ApiService.get('/check-token').then(response => {
-                        store.commit("STORE_USER", response.data.user);
-                        next()
-                    }).catch(error => {
-                        JwtService.destroyToken();
-                        next({name: 'Login'})
-                    })
-                }
             }
             if (to.name == 'Login') {
                 if (JwtService.getToken()) {

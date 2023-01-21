@@ -19,7 +19,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
     ];
@@ -53,5 +54,10 @@ class User extends Authenticatable
         return Attribute::make(
             set: fn ($value) => Hash::make($value),
         );
+    }
+
+    public function refreshToken()
+    {
+        return $this->hasMany(RefreshToken::class);
     }
 }

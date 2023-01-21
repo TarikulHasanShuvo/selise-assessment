@@ -9,9 +9,15 @@
           <div class="card-body">
             <form @submit.prevent="registration" class="mb-5">
               <div class="mb-3">
-                <label for="name" class="form-label">Full Name</label>
+                <label for="name" class="form-label">First Name</label>
                 <input type="text" class="form-control" id="name"
-                       v-model="form.name" required>
+                       v-model="form.first_name" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="name" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="name"
+                       v-model="form.last_name" required>
               </div>
 
               <div class="mb-3">
@@ -58,11 +64,11 @@ export default {
   methods: {
     registration() {
       ApiService.post('/registration', this.form).then(({data}) => {
-        JwtService.saveToken(data.access_token);
+        JwtService.saveToken(data.access_token,data.refresh_token);
         ApiService.init();
         this.$store.commit("STORE_USER", data.user);
         this.toastMessage('Registration Successfully');
-        this.$router.push({name: "Home"});
+        this.$router.push({name: "Dashboard"});
       }).catch((error) => {
         this.toastMessage( error.response.data.message,'error');
       });

@@ -15,13 +15,12 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('registration', 'registration');
 });
 
-Route::middleware('refresh.token')->group(function () {
-    Route::get('check-token', 'checkToken');
 
+
+Route::middleware('refresh.token')->group(function () {
 //Authenticate Routes
     Route::middleware('auth:sanctum')->group(function () {
         Route::controller(AuthController::class)->group(function () {
-
             Route::post('logout', 'logout');
         });
         Route::get('books', [BookController::class, 'index']);

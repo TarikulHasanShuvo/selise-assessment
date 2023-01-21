@@ -1,10 +1,11 @@
 import axios from 'axios';
-import JwtService from "./jwt.service";
+import JwtService, {getRefreshToken} from "./jwt.service";
 
 const ApiService = {
     init() {
         axios.defaults.baseURL = (process.env.VUE_APP_API_URL || "http://localhost:8000") + '/api/';
         axios.defaults.headers.common["Authorization"] = `Bearer ${JwtService.getToken()}`;
+        axios.defaults.headers.common["Authorization_refreshToken"] = JwtService.getRefreshToken();
     },
 
     get(resource, params) {

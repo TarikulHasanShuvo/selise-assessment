@@ -6,6 +6,10 @@ export const getToken = () => {
     return window.localStorage.getItem(ACCESS_TOKEN);
 };
 
+export const getRefreshToken = () => {
+    return window.localStorage.getItem(REFRESH_TOKEN);
+};
+
 export const saveToken = (token,refresh_token) => {
     window.localStorage.setItem(ACCESS_TOKEN, token);
     window.localStorage.setItem(REFRESH_TOKEN, refresh_token);
@@ -17,4 +21,4 @@ export const destroyToken = () => {
     window.localStorage.removeItem(EXPIRE_AT);
 };
 
-export default {getToken, saveToken, destroyToken};
+export default {getToken, saveToken, destroyToken,getRefreshToken};
