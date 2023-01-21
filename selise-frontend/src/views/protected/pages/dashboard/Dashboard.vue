@@ -42,7 +42,6 @@ export default {
   methods: {
     getBooks() {
       ApiService.get('books').then(({data}) => {
-        console.log(data)
         this.books = data;
       }).catch(e => console.log(e))
     },
